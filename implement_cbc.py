@@ -77,8 +77,8 @@ if __name__ == '__main__':
         print '(Optional) Usage: %s key iv\n' %(sys.argv[0])
 
     # AES CBC encrypt
-    text = open('cbc_input').read()
-    print '''CBC encrypting cbc_input file with %s as key, and <%s> as iv (written to cbc_output)'''%(key, repr(iv))
+    text = open('input').read()
+    print '''CBC encrypting file 'input' with %s as key, and <%s> as iv (written to cbc_output)'''%(key, repr(iv))
     encrypted_text = cbc_encrypt(text, key, iv)
 
     with open('cbc_output', 'w') as f:
