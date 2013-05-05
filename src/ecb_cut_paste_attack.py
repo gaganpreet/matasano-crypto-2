@@ -123,8 +123,8 @@ if __name__ == '__main__':
     padding_length = block_size - prefix_length % block_size
     email = 'a' * padding_length + 'admin'
 
+    # Get the block which has 'admin' at the start and store it
     encrypted = profile.encrypt(email)
-
     block_to_copy = blocks(encrypted, 16)[prefix_length/block_size + 1]
 
 
@@ -141,6 +141,6 @@ if __name__ == '__main__':
     encrypted = profile.encrypt('a' * padding_length)
 
     encrypted_blocks = blocks(encrypted, block_size)
-    encrypted_blocks[-1] = block_to_copy
+    encrypted_blocks[-1] = block_to_copy # Replace last block with earlier copied block
 
     profile.decrypt(''.join(encrypted_blocks))

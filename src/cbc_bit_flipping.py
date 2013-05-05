@@ -45,7 +45,8 @@
 
         decoded_block[i] = D(encoded_block[i], key) ^ encoded_block[i-1]
 
-    It's completely independent of the decoded part of the previous block, only depends on the encoded part
+    Because of the XOR with previous encoded block, whatever bit is flipped in that encoded block
+    it'll be reflected in the output of the decoded_block
 
     Are you even reading this? :)
 '''
@@ -90,7 +91,6 @@ def modify_bit_string(s, char_index, bit_index):
 
 if __name__ == '__main__':
     aes = RandomAES()
-    to_insert = '3admin-true3' + '\0'*4
 
     # I did this part manually, but it should be easily automatable
     #
@@ -107,6 +107,7 @@ if __name__ == '__main__':
     # bin(-) = 101101
     # bin(=) = 111101
     # Differ on fourth bit
+    to_insert = '3admin-true3' + '\0'*4
 
     encrypted = aes.encrypt(to_insert)
     print 'String is compromised: %s'%(is_compromised(aes.decrypt(encrypted)))
