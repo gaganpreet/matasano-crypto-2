@@ -34,11 +34,11 @@ def cbc_encrypt(text, key, iv):
     blocks = util.blocks(text, block_length)
 
     blocks[0] = util.string_xor(blocks[0], iv)
-    blocks[0] = util.ecb_encode(blocks[0], key)
+    blocks[0] = util.ecb_encrypt(blocks[0], key)
 
     for i in xrange(1, len(blocks)):
         blocks[i] = util.string_xor(blocks[i], blocks[i-1])
-        blocks[i] = util.ecb_encode(blocks[i], key)
+        blocks[i] = util.ecb_encrypt(blocks[i], key)
 
     return ''.join(blocks)
 
@@ -49,10 +49,10 @@ def cbc_decrypt(text, key, iv):
 
     decoded_blocks = [0] * len(blocks)
 
-    decoded_blocks[0] = util.ecb_decode(blocks[0], key)
+    decoded_blocks[0] = util.ecb_decrypt(blocks[0], key)
     decoded_blocks[0] = util.string_xor(decoded_blocks[0], iv)
     for i in xrange(1, len(blocks)):
-        decoded_blocks[i] = util.ecb_decode(blocks[i], key)
+        decoded_blocks[i] = util.ecb_decrypt(blocks[i], key)
         decoded_blocks[i] = util.string_xor(decoded_blocks[i], blocks[i-1])
 
     return ''.join(decoded_blocks)

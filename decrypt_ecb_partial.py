@@ -19,7 +19,7 @@ import random
 import math
 from base64 import b64decode
 from string import printable
-from util import ecb_encode, blocks
+from util import ecb_encrypt, blocks
 from detect_cipher import random_string
 
 unknown_string = '''Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkg
@@ -38,7 +38,7 @@ def random_aes(text):
     key = random_aes.key
     prefix = random_aes.prefix
 
-    return ecb_encode(prefix + text + padding, key) 
+    return ecb_encrypt(prefix + text + padding, key) 
 
 def build_dict(text, block_size, prefix_padding, skip_blocks):
     ''' Build a dictionary of all possible letters for lookup '''

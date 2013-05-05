@@ -25,7 +25,7 @@ import sys
 import random
 from collections import Counter
 import util
-from cbc import cbc_encrypt
+from implement_cbc import cbc_encrypt
 
 def random_string(length):
     ''' Generate a random string of length l'''
@@ -40,7 +40,7 @@ def encryption_oracle(text):
 
     if random.randint(0, 1):
         # ECB
-        return util.ecb_encode(text, key) 
+        return util.ecb_encrypt(text, key) 
     else:
         # CBC
         return cbc_encrypt(text, key, iv)

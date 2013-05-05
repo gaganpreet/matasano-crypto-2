@@ -48,7 +48,7 @@
 # profile.
 
 from detect_cipher import random_string
-from util import ecb_decode, ecb_encode, blocks
+from util import ecb_decrypt, ecb_encrypt, blocks
 
 def kv_parser(s):
     o = {}
@@ -74,14 +74,14 @@ class Profile:
             Random key is chosen once per code invocation
         '''
         key = self.key
-        return ecb_encode(self.profile_for(email), self.key)
+        return ecb_encrypt(self.profile_for(email), self.key)
 
     def decrypt(self, text):
         ''' Decrypt user profile with AES 128 ECB with a chosen random key
             Random key is chosen once per code invocation
         '''
         key = self.key
-        decrypted = ecb_decode(text, self.key)
+        decrypted = ecb_decrypt(text, self.key)
         o = kv_parser(decrypted)
         print 'Welcome ' + o['email'] + '. Your role is: ', o['role']
 

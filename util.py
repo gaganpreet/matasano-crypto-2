@@ -13,12 +13,12 @@ def string_xor(x, y):
     ''' Xor two equal length strings character by character '''
     return ''.join([chr(ord(a) ^ ord(b)) for a, b in zip(x,y)])
 
-def ecb_decode(text, key):
+def ecb_decrypt(text, key):
     ''' Decode an AES-128 ECB cipher '''
     c = AES.new(key, AES.MODE_ECB)
     return c.decrypt(text)
 
-def ecb_encode(text, key):
+def ecb_encrypt(text, key):
     ''' Encode an AES-128 ECB cipher '''
     text = pkcs_pad(text, len(key))
     c = AES.new(key, AES.MODE_ECB)

@@ -51,7 +51,7 @@
 
 from base64 import b64decode
 from string import printable
-from util import ecb_encode
+from util import ecb_encrypt
 from detect_cipher import random_string, detect_cipher
 
 unknown_string = '''Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkg
@@ -68,7 +68,7 @@ def random_aes(text):
         random_aes.key = random_string(16) 
     key = random_aes.key
 
-    return ecb_encode(text + padding, key)
+    return ecb_encrypt(text + padding, key)
 
 def find_block_size():
     ''' Figure out the block size by continually increasing string length 
