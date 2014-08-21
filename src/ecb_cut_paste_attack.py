@@ -99,9 +99,9 @@ def find_prefix_length(block_size):
         it till there are two repeated blocks in the encrypted text
     '''
     s = 'a' * block_size * 2
-    
+
     while True:
-        encrypted_text = profile.encrypt(s)                                                                                                                                                                                                                                         
+        encrypted_text = profile.encrypt(s)
         encrypted_blocks = blocks(encrypted_text, block_size)
 
         first_repetition = first_repeated(encrypted_blocks)
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     # It should be like this
     # |________________| |_________role=| |user______|
     cruft_length = prefix_length + (suffix_length - 4)
-    
+
     # Number of bytes required to round cruft to nearest block_size
     padding_length = block_size - cruft_length % block_size
 

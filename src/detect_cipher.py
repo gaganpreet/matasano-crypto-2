@@ -21,7 +21,6 @@
 # 
 # Now detect the block cipher mode the function is using each time. 
 
-import sys
 import random
 from collections import Counter
 import util

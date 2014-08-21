@@ -11,7 +11,7 @@ def blocks(text, block_size):
 
 def string_xor(x, y):
     ''' Xor two equal length strings character by character '''
-    return ''.join([chr(ord(a) ^ ord(b)) for a, b in zip(x,y)])
+    return ''.join([chr(ord(a) ^ ord(b)) for a, b in zip(x, y)])
 
 def ecb_decrypt(text, key):
     ''' Decode an AES-128 ECB cipher '''
@@ -29,6 +29,6 @@ def pkcs_pad(string, block_size):
     pad_length = 0
     if len(string) % block_size > 0:
         pad_length = block_size - (len(string) % block_size)
-    
+
     pad = chr(pad_length)
     return string + pad_length * pad

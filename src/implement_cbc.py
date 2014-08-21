@@ -64,21 +64,21 @@ if __name__ == '__main__':
 
     # See if sys.argv has iv and key given
     if len(sys.argv) > 2:
-        key = argv[1]
+        key = sys.argv[1]
         if len(key) != 16:
-            print 'Length of key is %d, but should be 16'%(len(key))
+            print 'Length of key is %d, but should be 16' % (len(key))
             sys.exit(0)
 
-        iv = argv[2]
+        iv = sys.argv[2]
         if len(iv) != 16:
-            print 'Length of IV is %d, but should be 16'%(len(iv))
+            print 'Length of IV is %d, but should be 16' % (len(iv))
             sys.exit(0)
     else:
-        print '(Optional) Usage: %s key iv\n' %(sys.argv[0])
+        print '(Optional) Usage: %s key iv\n' % (sys.argv[0])
 
     # AES CBC encrypt
     text = open('input').read()
-    print '''CBC encrypting file 'input' with %s as key, and <%s> as iv (written to cbc_output)'''%(key, repr(iv))
+    print '''CBC encrypting file 'input' with %s as key, and <%s> as iv (written to cbc_output)''' % (key, repr(iv))
     encrypted_text = cbc_encrypt(text, key, iv)
 
     with open('cbc_output', 'w') as f:
@@ -87,5 +87,5 @@ if __name__ == '__main__':
     # AES CBC decrypt
     text = open('3132976/gistfile1.txt').read()
     text = b64decode(text)
-    print '''CBC decrypting 3132976/gistfile1.txt with %s as key, and <%s> as iv (on stdout)'''%(key, repr(iv))
+    print '''CBC decrypting 3132976/gistfile1.txt with %s as key, and <%s> as iv (on stdout)''' % (key, repr(iv))
     print cbc_decrypt(text, key, iv)

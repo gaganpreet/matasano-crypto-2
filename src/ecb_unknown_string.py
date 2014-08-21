@@ -65,7 +65,7 @@ def random_aes(text):
     '''
     padding = b64decode(unknown_string)
     if 'key' not in random_aes.func_dict:
-        random_aes.key = random_string(16) 
+        random_aes.key = random_string(16)
     key = random_aes.key
 
     return ecb_encrypt(text + padding, key)
@@ -99,7 +99,7 @@ def decode(block_size):
 
     for current_block in xrange(blocks):
         # block_known length is always (block_size - 1)
-        # This is hashed in lookup_dict, which gives one 
+        # This is hashed in lookup_dict, which gives one
         # character from the unknown string at a time
 
         if len(block_found):
@@ -113,7 +113,8 @@ def decode(block_size):
             lookup_dict = build_dict(block_known, block_size)
 
             encrypted = random_aes('a' * l)
-            encrypted_block = encrypted[block_size * current_block : block_size * (current_block + 1)]
+            encrypted_block = encrypted[(block_size * current_block):
+                                        (block_size * (current_block + 1))]
             try:
                 c = lookup_dict[encrypted_block]
             except KeyError:
@@ -132,7 +133,7 @@ if __name__ == '__main__':
 
     # b
     cipher_mode = detect_cipher(random_aes(open('input').read()))
-    print "Detected cipher mode %s\n\n"%(cipher_mode)
+    print "Detected cipher mode %s\n\n" % (cipher_mode)
 
     if cipher_mode == 'ECB':
         # c

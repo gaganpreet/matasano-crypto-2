@@ -52,12 +52,8 @@
 '''
 
 import urllib
-import random
-from base64 import b64decode
-from string import printable
-from util import blocks, string_xor
 from implement_cbc import cbc_encrypt, cbc_decrypt
-from detect_cipher import random_string, detect_cipher
+from detect_cipher import random_string
 
 class RandomAES():
     def __init__(self):
@@ -110,7 +106,7 @@ if __name__ == '__main__':
     to_insert = '3admin-true3' + '\0'*4
 
     encrypted = aes.encrypt(to_insert)
-    print 'String is compromised: %s'%(is_compromised(aes.decrypt(encrypted)))
+    print 'String is compromised: %s' % (is_compromised(aes.decrypt(encrypted)))
 
     print 'Modifying bits'
     # print blocks(encrypted, 16)
@@ -119,7 +115,6 @@ if __name__ == '__main__':
     encrypted = modify_bit_string(encrypted, 27, 3)
     # print blocks(encrypted, 16)
 
-
     decrypted = aes.decrypt(encrypted)
 
-    print 'String is compromised: %s'%(is_compromised(decrypted))
+    print 'String is compromised: %s' % (is_compromised(decrypted))

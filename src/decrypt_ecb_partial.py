@@ -45,7 +45,7 @@ def build_dict(text, block_size, prefix_padding, skip_blocks):
     lookup_dict = {}
     for c in printable:
         e = random_aes(prefix_padding * 'a' + text + c)
-        e = e[block_size * skip_blocks : block_size * (skip_blocks + 1)]
+        e = e[(block_size * skip_blocks):(block_size * (skip_blocks + 1))]
         lookup_dict[e] = c
     return lookup_dict
 
@@ -76,16 +76,15 @@ def find_prefix_length(block_size):
 def decode(block_size):
     ''' Decode the string by introducing one character at a time  '''
     prefix_length = find_prefix_length(block_size)
-    print 'Detected prefix of length %d'%(prefix_length)
+    print 'Detected prefix of length %d' % (prefix_length)
 
     skip_blocks = int(math.ceil(1.0 * prefix_length/block_size))
     prefix_padding = block_size - prefix_length % block_size
 
     blocks = len(random_aes('a' * prefix_padding)) / block_size
 
-
     print '''Blocks to skip: %d
-Padding to add: %d\n\n\n'''%(skip_blocks, prefix_padding)
+Padding to add: %d\n\n\n''' % (skip_blocks, prefix_padding)
     # The whole string
     found = ''
     # String from the current block being decoded
@@ -106,8 +105,9 @@ Padding to add: %d\n\n\n'''%(skip_blocks, prefix_padding)
         for l in xrange(block_size - 1, -1, -1):
             lookup_dict = build_dict(block_known, block_size, prefix_padding, skip_blocks)
 
-            encrypted = random_aes('a' * prefix_padding  +  'a' * l)
-            encrypted_block = encrypted[block_size * (current_block + skip_blocks) : block_size * (skip_blocks + current_block + 1)]
+            encrypted = random_aes('a' * prefix_padding + 'a' * l)
+            encrypted_block = encrypted[block_size * (current_block + skip_blocks):
+                                        block_size * (skip_blocks + current_block + 1)]
             try:
                 c = lookup_dict[encrypted_block]
             except KeyError:
